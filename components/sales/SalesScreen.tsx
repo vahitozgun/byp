@@ -363,7 +363,7 @@ export function SalesScreen() {
       </div>
 
       {/* Kaydet butonu */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-zinc-200 px-4 py-4 pb-[max(16px,env(safe-area-inset-bottom))]">
+      <div className="fixed bottom-14 left-0 right-0 bg-white border-t border-zinc-200 px-4 py-4">
         <button onClick={handleSave} disabled={!canSave}
           className={`w-full h-14 rounded-2xl text-base font-black tracking-wide transition-all duration-150 ${canSave ? "bg-amber-500 text-white active:scale-[0.98] shadow-[0_4px_16px_rgba(245,158,11,0.4)]" : "bg-zinc-100 text-zinc-400 cursor-not-allowed"}`}>
           {saving ? (
