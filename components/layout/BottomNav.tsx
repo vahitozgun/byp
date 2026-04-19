@@ -34,7 +34,7 @@ export function BottomNav() {
   const { isPrivileged } = useRole();
   const navItems = isPrivileged ? ADMIN_NAV : REP_NAV;
   return (
-    <nav className="flex-shrink-0 bg-white border-t border-zinc-200 pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-zinc-200 pb-[env(safe-area-inset-bottom)]">
       <div className="flex items-stretch h-14">
         {navItems.map((item) => {
           const isActive = item.href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(item.href);

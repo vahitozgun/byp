@@ -12,9 +12,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (!profile || !profile.is_active) { await supabase.auth.signOut(); redirect("/auth/login"); }
   return (
     <AuthProvider>
-      <div className="flex flex-col h-[100dvh] overflow-hidden">
+      <div className="flex flex-col h-[100dvh]">
         <TopBar />
-        <main className="flex-1 overflow-y-auto bg-zinc-50">{children}</main>
+        <main className="flex-1 overflow-y-auto bg-zinc-50 pb-16">{children}</main>
         <BottomNav />
       </div>
     </AuthProvider>
