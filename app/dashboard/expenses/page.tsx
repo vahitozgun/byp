@@ -16,7 +16,8 @@ const DOT_COLORS: Record<string, string> = {
 
 export default function ExpensesPage() {
   const supabase = useMemo(() => createClient(), []);
-  const { user, dealer, isAdmin } = useAuth();
+  const { user, dealer, isAdmin, isManager } = useAuth();
+  const isPrivileged = isAdmin || isManager;
 
   const [expenses, setExpenses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,6 +45,12 @@ export default function ExpensesPage() {
     setForm({ category: "Yemek", customCategory: "", amount: "" });
     setError("");
     setShowModal(true);
+  }
+
+  async function handleDelete(id: string) {
+    if (!confirm("Bu gideri silmek istediğinize emin misiniz?")) return;
+    await supabase.from("expenses").delete().eq("id", id);
+    fetchExpenses();
   }
 
   async function handleSave() {
@@ -99,10 +106,16 @@ export default function ExpensesPage() {
                   <p className="text-sm font-bold text-zinc-900 truncate">{e.category}</p>
                   <p className="text-xs text-zinc-400 mt-0.5">
                     {new Date(e.expense_date).toLocaleDateString("tr-TR", { day: "2-digit", month: "short" })}
-                    {isAdmin && e.creator ? ` · ${e.creator.full_name}` : ""}
+                    {isPrivileged && e.creator ? ` · ${e.creator.full_name}` : ""}
                   </p>
                 </div>
                 <p className="text-sm font-black text-red-500 tabular-nums flex-shrink-0">-{fmt(Number(e.amount))}</p>
+                {isPrivileged && (
+                  <button onClick={() => handleDelete(e.id)}
+                    className="text-xs font-semibold text-red-400 hover:text-red-600 flex-shrink-0">
+                    Sil
+                  </button>
+                )}
               </div>
             ))}
             {expenses.length === 0 && (
