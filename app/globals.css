@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  body > * { display: none !important; }
+  #print-report { display: block !important; }
+  @page { margin: 1.5cm; size: A4; }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 10% 10%;
+    --card: 0 0% 99%;
+    --card-foreground: 224 10% 10%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 8% 46%;
+    --primary: 28 90% 44%;
+    --primary-foreground: 0 0% 100%;
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 89%;
+    --input: 220 13% 89%;
+    --ring: 28 90% 44%;
+    --radius: 0.75rem;
+  }
+  * { box-sizing: border-box; @apply border-border; }
+  body { @apply bg-background text-foreground antialiased; }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type="number"] { -moz-appearance: textfield; }
+}
