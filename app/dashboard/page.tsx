@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fmt, fmtDate } from "@/lib/format";
+import { ExportButton } from "@/components/ExportButton";
 
 export const metadata: Metadata = { title: "Ana Sayfa" };
 export const revalidate = 0;
@@ -170,11 +171,14 @@ export default async function DashboardPage() {
     <div className="px-4 py-4 space-y-4 pb-24">
 
       {/* Selamlama */}
-      <div>
-        <p className="text-[11px] font-semibold text-zinc-400 uppercase tracking-widest">
-          {new Date().toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}
-        </p>
-        <p className="text-xl font-black text-zinc-900 mt-0.5">{greeting}, {firstName}</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-semibold text-zinc-400 uppercase tracking-widest">
+            {new Date().toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long" })}
+          </p>
+          <p className="text-xl font-black text-zinc-900 mt-0.5">{greeting}, {firstName}</p>
+        </div>
+        {isPrivileged && <ExportButton />}
       </div>
 
       {/* Bugünün istatistikleri */}
